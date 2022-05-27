@@ -7,10 +7,34 @@ import java.util.Map;
 
 import comp1721.cwk2.Card.Rank;
 
+
+/**
+ * A class to represent a pokerhand.
+ *
+ * <p>The intent is that this should form a pokerhand
+ * which will be used in card game. It will be initialised and
+ * the methods in it will be used after being initialised.</p>
+ *
+ * <p>Provided for use in COMP1721 Coursework 2.</p>
+ *
+ * @author Wanrong Xie
+ */
 public class PokerHand extends CardCollection{
+	
+	/**
+	 * Creates a PokerHand object that 
+	 * creates an empty hand.
+	 *
+	 */
 	public PokerHand(){
 		super();
 	}
+	/**
+	 * Creates a PokerHand object.
+	 *
+	 * @param name Name of a pokerhand
+	 *
+	 */
 	public PokerHand(String name) throws CardException{
 		super();
         String[] parts = name.split(" ");
@@ -24,6 +48,17 @@ public class PokerHand extends CardCollection{
         }
        
 	}
+	
+	/**
+	 * Creates a two-character form string representation of this pokerhand.
+	 *
+	 * <p>In every card of the pokerhand, the first character represents rank, 
+	 * the second represents suit. Cards are separated by spaces.
+	 * Special Unicode symbols will be used for the latter if
+	 * <code>Card.fancySymbols</code> is set to <code>true</code>.</p>
+	 *
+	 * @return String representation of this pokerhand
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -40,6 +75,10 @@ public class PokerHand extends CardCollection{
 			return sb.toString();
 		}	
 	}
+	
+	/**
+	 * Discards all the cards from this pokerhand.
+	 */
 	@Override
 	public void discard() throws CardException{
 		// TODO Auto-generated method stub
@@ -50,17 +89,36 @@ public class PokerHand extends CardCollection{
 		}
 		
 	}
+	
+	/**
+	 * Provides the number of cards in this pokerhand.
+	 *
+	 * @return Number of cards
+	 */
 	@Override
 	public int size() {
 		// TODO Auto-generated method stub
 		return super.size();
 	}
+	
+	/**
+	 * Empties the hand of cards and 
+	 * returns each of them to the specified deck.
+	 *
+	 * @param deck The deck object to receive the discarded pokerhand 
+	 */
 	public void discardTo(Deck deck){
 		for (Card card: cards){
 			deck.add(card);
 		}
 		this.discard();
 	}
+	
+	/**
+	 * Adds the given card to this pokerhand.
+	 *
+	 * @param card Card to be added
+	 */
 	@Override
 	public void add(Card card) throws CardException{
 		// TODO Auto-generated method stub
@@ -75,6 +133,10 @@ public class PokerHand extends CardCollection{
 			throw new CardException("The pokerhand is already full, you cannot add any card\n");
 		}	
 	}
+	
+	/**
+	 * Sorts this pokerhand's cards In ascending order of rank.
+	 */
 	@Override
 	public void sort() {
 		// TODO Auto-generated method stub
@@ -85,6 +147,13 @@ public class PokerHand extends CardCollection{
 	    });
 
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is one pair or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isPair(){
 		if (cards.size() == 5){
 			Map<Rank, Integer> map = new HashMap<Rank, Integer>();
@@ -117,6 +186,13 @@ public class PokerHand extends CardCollection{
 		}
 		
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is two pairs or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isTwoPairs(){
 		if (cards.size() == 5){
 			Map<Rank, Integer> map = new HashMap<Rank, Integer>();
@@ -144,6 +220,13 @@ public class PokerHand extends CardCollection{
 		}
 		
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is three of a kind or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isThreeOfAKind(){
 		if (cards.size() == 5){
 			Map<Rank, Integer> map = new HashMap<Rank, Integer>();
@@ -174,6 +257,13 @@ public class PokerHand extends CardCollection{
 		}
 		
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is four of a kind or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isFourOfAKind(){
 		if (cards.size() == 5){
 			Map<Rank, Integer> map = new HashMap<Rank, Integer>();
@@ -201,6 +291,13 @@ public class PokerHand extends CardCollection{
 		}
 		
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is full house or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isFullHouse(){
 		if (cards.size() == 5){
 			Map<Rank, Integer> map = new HashMap<Rank, Integer>();
@@ -232,6 +329,12 @@ public class PokerHand extends CardCollection{
 		
 	}
 
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is straight or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isStraight(){
 		if (cards.size() == 5){
 			int count = 0;
@@ -258,6 +361,13 @@ public class PokerHand extends CardCollection{
 		}
 			
 	}
+	
+	/**
+	 * Predicate function to judge whether
+	 * the poker hand is flush or not
+	 * 
+	 * @return boolean result of the predicate
+	 */
 	public boolean isFlush(){
 		if (cards.size() == 5){
 			for (int i=0; i<cards.size()-1; i++){
