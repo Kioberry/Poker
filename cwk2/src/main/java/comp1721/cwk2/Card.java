@@ -227,7 +227,6 @@ public class Card implements Comparable<Card> {
   @Override
   public int compareTo(Card other) {
     int difference = suit.compareTo(other.suit);
-
     if (difference == 0) {
       difference = rank.compareTo(other.rank);
     }
