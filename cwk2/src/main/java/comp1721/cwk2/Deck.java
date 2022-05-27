@@ -32,9 +32,9 @@ public class Deck extends CardCollection{
 				Rank.JACK, Rank.QUEEN, Rank.KING};
 		Suit[] suits=new Suit[]{Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS,
 				Suit.SPADES};
-		for (int i=0; i<ranks.length; i++){
-			for (int j=0; j<suits.length; j++){
-				cards.add(new Card(ranks[i], suits[j]));
+		for (int i=0; i<suits.length; i++){
+			for (int j=0; j<ranks.length; j++){
+				cards.add(new Card(ranks[j], suits[i]));
 			}
 		}
 	}
@@ -95,11 +95,16 @@ public class Deck extends CardCollection{
 	 * 
 	 * @return the card object that has been removed
 	 */
-	public Card deal() {
+	public Card deal() throws CardException{
 		// TODO Auto-generated method stub
-		Card card = new Card(cards.get(0).getRank(), cards.get(0).getSuit());
-		cards.remove(0);
-		return card;
+		if (!this.isEmpty()){
+			Card card = new Card(cards.get(0).getRank(), cards.get(0).getSuit());
+			cards.remove(0);
+			return card;
+		}else{
+			throw new CardException("No more cards can be removed\n");
+		}
+		
 	}
 	
 }
